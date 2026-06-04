@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Objek Kalkulator</title>
+</head>
+<body>
+    <script>
+        //CONTOH OBJEK BERISI FUNCTION
+        let calculator = {
+            //VARIABEL BIASA
+            nilai1: 10,
+            nilai2: 5,
+            
+            add: function(a, b) {
+                return a + b;
+            },
+            subtract: function(a, b) {
+                return a - b;
+            },
+            multiply: function(a, b) {
+                return a * b;
+            },
+            divide: function(a, b) {
+                if (b !== 0) {
+                    return a / b;
+                } else {
+                    return "Tidak bisa membagi dengan nol";
+                }
+            }
+        };
+        
+        //PANGGIL FUNCTION DARI OBJEK CALCULATOR
+        console.log("Hasil Penjumlahan: ", calculator.add(5, 3));
+        
+        // Tambahan buat ngetes function yang lain (boleh dihapus kalau nggak perlu)
+        console.log("Hasil Pengurangan: ", calculator.subtract(10, 4));
+        console.log("Hasil Perkalian: ", calculator.multiply(3, 4));
+        console.log("Hasil Pembagian: ", calculator.divide(10, 2));
+        console.log("Test bagi nol: ", calculator.divide(10, 0));
+    </script>
+</body>
+</html>

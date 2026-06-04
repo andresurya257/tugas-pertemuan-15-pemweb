@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Pertemuan 14 - Data Mahasiswa</title>
+    <style>
+        /* CSS dasar agar tampilannya rapi mirip seperti di proyektor */
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 30px; 
+            max-width: 800px;
+        }
+        .form-group { 
+            margin-bottom: 15px; 
+        }
+        label { 
+            display: inline-block; 
+            width: 100px; 
+            font-weight: bold;
+        }
+        input { 
+            padding: 5px; 
+            width: 250px;
+        }
+        .btn-simpan { 
+            margin-top: 10px; 
+            margin-left: 105px;
+            padding: 8px 15px; 
+            cursor: pointer; 
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 30px; 
+        }
+        th, td { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: #f4f4f4; 
+        }
+        .btn-hapus {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Data Mahasiswa</h2>
+
+    <!-- BAGIAN 1: FORM INPUT DATA -->
+    <form id="formMahasiswa">
+        <div class="form-group">
+            <label for="nim">NIM</label>
+            <input type="text" id="nim" required>
+        </div>
+        <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" required>
+        </div>
+        <div class="form-group">
+            <label for="jurusan">Jurusan</label>
+            <input type="text" id="jurusan" required>
+        </div>
+        <div class="form-group">
+            <label for="fakultas">Fakultas</label>
+            <input type="text" id="fakultas" required>
+        </div>
+        <button type="submit" class="btn-simpan">Simpan</button>
+    </form>
+
+    <!-- BAGIAN 2: TABEL OUTPUT DATA -->
+    <table id="tabelMahasiswa">
+        <thead>
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Jurusan</th>
+                <th>Fakultas</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <!-- tbody ini sengaja dikosongkan karena akan diisi oleh JavaScript -->
+        <tbody>
+        </tbody>
+    </table>
+
+    <!-- BAGIAN 3: LOGIK JAVASCRIPT -->
+    <script>
+        // 1. Siapkan Array kosong untuk menyimpan kumpulan objek mahasiswa
+        let dataMahasiswa = [];
+
+        // Menangkap elemen HTML yang dibutuhkan
+        const form = document.getElementById('formMahasiswa');
+        const tbody = document.querySelector('#tabelMahasiswa tbody');
+
+        // 2. Buat event ketika tombol 'Simpan' ditekan (form disubmit)
+        form.addEventListener('submit', function(event) {
+            // Mencegah halaman web melakukan reload otomatis
+            event.preventDefault(); 
+
+            // Ambil nilai (value) yang diketik user di form
+            let inputNim = document.getElementById('nim').value;
+            let inputNama = document.getElementById('nama').value;
+            let inputJurusan = document.getElementById('jurusan').value;
+            let inputFakultas = document.getElementById('fakultas').value;
+
+            // Buat Objek baru (konsep key: value)
+            let mahasiswaBaru = {
+                nim: inputNim,
+                nama: inputNama,
+                jurusan: inputJurusan,
+                fakultas: inputFakultas
+            };
+
+            // Masukkan objek tersebut ke dalam Array
+            dataMahasiswa.push(mahasiswaBaru);
+
+            // Bersihkan form agar siap diisi data berikutnya
+            form.reset();
+
+            // Panggil fungsi untuk mencetak isi array ke tabel HTML
+            tampilkanTabel();
+        });
+
+        // 3. Fungsi untuk menampilkan/merender data dari Array ke dalam Tabel
+        function tampilkanTabel() {
+            // Kosongkan isi tabel terlebih dahulu agar tidak ada data ganda
+            tbody.innerHTML = '';
+
+            // Looping array dataMahasiswa
+            for (let i = 0; i < dataMahasiswa.length; i++) {
+                let mhs = dataMahasiswa[i];
+                
+                // Buat elemen baris (<tr>) baru
+                let baris = document.createElement('tr');
+
+                // Isi baris tersebut dengan kolom (<td>) beserta isinya
+                // Ditambah tombol Hapus untuk kolom "Aksi"
+                baris.innerHTML = `
+                    <td>${mhs.nim}</td>
+                    <td>${mhs.nama}</td>
+                    <td>${mhs.jurusan}</td>
+                    <td>${mhs.fakultas}</td>
+                    <td><button class="btn-hapus" onclick="hapusData(${i})">Hapus</button></td>
+                `;
+
+                // Masukkan baris yang sudah dibuat ke dalam <tbody>
+                tbody.appendChild(baris);
+            }
+        }
+
+        // Fungsi tambahan untuk tombol hapus di kolom "Aksi" (Sesuai foto proyektor)
+        function hapusData(index) {
+            // Hapus 1 data dari array berdasarkan posisinya (index)
+            dataMahasiswa.splice(index, 1);
+            
+            // Setelah dihapus dari array, tampilkan ulang tabelnya
+            tampilkanTabel();
+        }
+    </script>
+
+</body>
+</html>

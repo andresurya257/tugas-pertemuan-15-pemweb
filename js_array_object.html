@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Array of Objects</title>
+</head>
+<body>
+    <script>
+        // Array yang berisi kumpulan objek mahasiswa
+        let mahasiswa = [
+            {
+                nim: "123456789",
+                nama: "John Doe",
+                jurusan: "Teknik Informatika",
+                fakultas: "Ilmu Komputer"
+            },
+            {
+                nim: "987654321",
+                nama: "Jane Smith",
+                jurusan: "Sistem Informasi",
+                fakultas: "Ilmu Komputer"
+            },
+            {
+                nim: "456789123",
+                nama: "Alice Johnson",
+                jurusan: "Teknik Elektro",
+                fakultas: "Teknik"
+            },
+            {
+                nim: "789123456",
+                nama: "Bob Brown",
+                jurusan: "Manajemen Informatika",
+                fakultas: "Ilmu Komputer"
+            },
+            {
+                nim: "321654987",
+                nama: "Charlie Davis",
+                jurusan: "Teknik Mesin",
+                fakultas: "Teknik"
+            }
+        ];
+
+        // tampilkan semua data mahasiswa
+        console.log("Data Mahasiswa: ");
+        
+        for (let i = 0; i < mahasiswa.length; i++) {
+            // Menggunakan backtick (`) / template literal agar mudah menggabungkan teks dan variabel
+            console.log(`Mahasiswa ke-${i + 1}:`);
+            console.log(`  NIM: ${mahasiswa[i].nim}`);
+            console.log(`  Nama: ${mahasiswa[i].nama}`);
+            console.log(`  Jurusan: ${mahasiswa[i].jurusan}`);
+            console.log(`  Fakultas: ${mahasiswa[i].fakultas}`);
+        }
+    </script>
+</body>
+</html>
